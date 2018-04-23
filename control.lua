@@ -25,11 +25,14 @@ local refill_tools = function(inventory, tool)
 end
 
 local on_built_entity_event = function(event)
-	local player = game.players[event.player_index]
+--	local player = game.players[event.player_index]
+    local player = game.players[1]
 	local item = event.created_entity
+--	player.print(item.type)
 	if tools[item.type] ~= nil then
 		refill_tools(player.get_main_inventory(), item.name)
 	end
 end
 
-script.on_event(defines.events.on_built_entity, don_built_entity_event)
+script.on_event(defines.events.on_built_entity, on_built_entity_event)
+script.on_event(defines.events.on_robot_built_entity, on_built_entity_event)
